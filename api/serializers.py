@@ -3,4 +3,8 @@ from rest_framework import serializers
 from task.models import Task
 
 
-class TaskSerializer(serializers.ModelS
+class TaskSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Task
+        fields = '__all__'
