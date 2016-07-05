@@ -42,6 +42,12 @@ INSTALLED_APPS = (
     'task',
 )
 
+INSTALLED_APPS += ('storages',)
+AWS_STORAGE_BUCKET_NAME = "testbucketbrett"
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+STATIC_URL = S3_URL
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -77,13 +83,22 @@ WSGI_APPLICATION = 'brett_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'bretttestdb',
+        'USER' : 'bdeangelis',
+        'PASSWORD' : 'hawaii50',
+        'HOST' : ' bretttestdb.ckcbuwrxgprf.us-west-2.rds.amazonaws.com',
+        'PORT' : '5432',
     }
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
